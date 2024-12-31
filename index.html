@@ -2,165 +2,127 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countdown to New Year 2025</title>
+    <title>Countdown to New Year</title>
     <!-- Google Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap"
       rel="stylesheet"
     />
     <style>
+      :root {
+        --color-white: #ffffff;
+        --color-black: #202020;
+        --color-glass: rgba(255, 255, 255, 0.05);
+        --color-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      }
+
       * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
         font-family: "Poppins", sans-serif;
-        color: #fff;
+        color: var(--color-white);
       }
 
       body {
-        background: linear-gradient(to right, #6a11cb, #2575fc);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
-        text-align: center;
+        background: url('background-img.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+        background-color: black;
       }
 
       .wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        font-size: 16px;
       }
 
-      .heading h3 {
-        font-size: 1.5em;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        font-weight: 600;
-        background-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(12px);
-        padding: 10px 20px;
-        margin-bottom: 20px;
-        border-radius: 50px;
-        display: inline-block;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      .heading {
+        text-align: center;
+        margin-bottom: 4em;
       }
 
       .heading h1 {
-        font-size: 5em;
+        text-shadow: var(--color-shadow);
+        font-size: 6.2em;
         font-weight: 800;
-        letter-spacing: 0.1em;
-        margin-bottom: 50px;
+        letter-spacing: 0.15em;
+      }
+
+      .heading h3 {
+        font-size: 1.6em;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
-        text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        font-weight: 600;
+        background-color: var(--color-glass);
+        backdrop-filter: blur(12px);
+        box-shadow: var(--color-shadow);
+        padding: 8px 30px;
+        display: inline-block;
       }
 
       .countdown {
+        width: 95vw;
         display: flex;
-        justify-content: center;
-        gap: 15px;
+        justify-content: space-around;
+        gap: 10px;
       }
 
       .box {
-        width: 70px;
-        height: 100px;
+        width: 28vmin;
+        height: 29vmin;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+        justify-content: space-evenly;
         position: relative;
       }
 
-      .num {
-        width: 100%;
+      span.num {
+        background-color: var(--color-glass);
+        backdrop-filter: blur(12px);
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 3em;
-        font-weight: 800;
-        border-radius: 10px;
-        color: #fff;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        transform-style: preserve-3d;
-        animation: flip 1s infinite;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        font-size: 4em;
+        box-shadow: var(--color-shadow);
+        border-radius: 0.1em;
       }
 
-      .text {
-        font-size: 1.2em;
-        margin-top: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .box span {
+      span.num:after {
+        content: "";
         position: absolute;
-        top: 0;
+        background-color: var(--color-glass);
+        height: 100%;
+        width: 50%;
         left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        transition: opacity 0.5s;
       }
 
-      .box span.show {
-        opacity: 1;
-      }
-
-      .box .num {
-        transition: transform 0.5s;
-      }
-
-      @keyframes flip {
-        0% {
-          transform: rotateX(0deg);
-        }
-        50% {
-          transform: rotateX(180deg);
-        }
-        100% {
-          transform: rotateX(360deg);
-        }
-      }
-
-      @media (max-width: 768px) {
-        .heading h1 {
-          font-size: 4em;
-        }
-
-        .countdown {
-          gap: 10px;
-        }
-
-        .box {
-          width: 60px;
-          height: 90px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .heading h1 {
-          font-size: 3.5em;
-        }
-
-        .box {
-          width: 50px;
-          height: 80px;
-        }
-
-        .text {
-          font-size: 1em;
-        }
+      span.text {
+        font-size: 1em;
+        background-color: var(--color-white);
+        color: var(--color-black);
+        display: block;
+        width: 80%;
+        position: relative;
+        text-align: center;
+        bottom: 20px;
+        padding: 0.7em 0;
+        font-weight: 600;
+        border-radius: 0.3em;
+        box-shadow: var(--color-shadow);
       }
     </style>
   </head>
   <body>
     <div class="wrapper">
       <div class="heading">
-        <h3>Countdown To</h3>
+        <h3>Countdown Till</h3>
         <h1>2025</h1>
       </div>
       <div class="countdown">
@@ -188,11 +150,10 @@
       let hrBox = document.getElementById("hr-box");
       let minBox = document.getElementById("min-box");
       let secBox = document.getElementById("sec-box");
-
       let endDate = new Date(2025, 0, 1, 00, 00);
       let endTime = endDate.getTime();
 
-      function updateCountdown() {
+      function countdown() {
         let todayDate = new Date();
         let todayTime = todayDate.getTime();
         let remainingTime = endTime - todayTime;
@@ -202,11 +163,11 @@
 
         let addZeroes = (num) => (num < 10 ? `0${num}` : num);
 
-        if (remainingTime <= 0) {
+        if (endTime < todayTime) {
           clearInterval(i);
           document.querySelector(
             ".countdown"
-          ).innerHTML = `<h1>The Countdown is Over!</h1>`;
+          ).innerHTML = `<h1>Countdown Has Expired</h1>`;
         } else {
           let daysLeft = Math.floor(remainingTime / oneDay);
           let hrsLeft = Math.floor((remainingTime % oneDay) / oneHr);
@@ -220,8 +181,8 @@
         }
       }
 
-      let i = setInterval(updateCountdown, 1000);
-      updateCountdown();
+      let i = setInterval(countdown, 1000);
+      countdown();
     </script>
   </body>
 </html>
