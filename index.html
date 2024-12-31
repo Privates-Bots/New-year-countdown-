@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown to New Year 2025</title>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+      }
+
+      body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .heading h3 {
+        font-size: 1.5em;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        border-radius: 50px;
+        display: inline-block;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .heading h1 {
+        font-size: 5em;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .box {
+        width: 70px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .num {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3em;
+        font-weight: 800;
+        border-radius: 10px;
+        color: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        transform-style: preserve-3d;
+        animation: flip 1s infinite;
+      }
+
+      .text {
+        font-size: 1.2em;
+        margin-top: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .box span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .box span.show {
+        opacity: 1;
+      }
+
+      .box .num {
+        transition: transform 0.5s;
+      }
+
+      @keyframes flip {
+        0% {
+          transform: rotateX(0deg);
+        }
+        50% {
+          transform: rotateX(180deg);
+        }
+        100% {
+          transform: rotateX(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .heading h1 {
+          font-size: 4em;
+        }
+
+        .countdown {
+          gap: 10px;
+        }
+
+        .box {
+          width: 60px;
+          height: 90px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .heading h1 {
+          font-size: 3.5em;
+        }
+
+        .box {
+          width: 50px;
+          height: 80px;
+        }
+
+        .text {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="heading">
+        <h3>Countdown To</h3>
+        <h1>2025</h1>
+      </div>
+      <div class="countdown">
+        <div class="box">
+          <span class="num" id="day-box">00</span>
+          <span class="text">Days</span>
+        </div>
+        <div class="box">
+          <span class="num" id="hr-box">00</span>
+          <span class="text">Hours</span>
+        </div>
+        <div class="box">
+          <span class="num" id="min-box">00</span>
+          <span class="text">Minutes</span>
+        </div>
+        <div class="box">
+          <span class="num" id="sec-box">00</span>
+          <span class="text">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let dayBox = document.getElementById("day-box");
+      let hrBox = document.getElementById("hr-box");
+      let minBox = document.getElementById("min-box");
+      let secBox = document.getElementById("sec-box");
+
+      let endDate = new Date(2025, 0, 1, 00, 00);
+      let endTime = endDate.getTime();
+
+      function countdown() {
+        let todayDate = new Date();
+        let todayTime = todayDate.getTime();
+        let remainingTime = endTime - todayTime;
+        let oneMin = 60 * 1000;
+        let oneHr = 60 * oneMin;
+        let oneDay = 24 * oneHr;
+
+        let addZeroes = (num) => (num < 10 ? `0${num}` : num);
+
+        if (remainingTime <= 0) {
+          clearInterval(i);
+          document.querySelector(
+            ".countdown"
+          ).innerHTML = `<h1>The Countdown is Over!</h1>`;
+        } else {
+          let daysLeft = Math.floor(remainingTime / oneDay);
+          let hrsLeft = Math.floor((remainingTime % oneDay) / oneHr);
+          let minsLeft = Math.floor((remainingTime % oneHr) / oneMin);
+          let secsLeft = Math.floor((remainingTime % oneMin) / 1000);
+
+          dayBox.textContent = addZeroes(daysLeft);
+          hrBox.textContent = addZeroes(hrsLeft);
+          minBox.textContent = addZeroes(minsLeft);
+          secBox.textContent = addZeroes(secsLeft);
+        }
+      }
+
+      let i = setInterval(countdown, 1000);
+      countdown();
+    </script>
+  </body>
+</html>
